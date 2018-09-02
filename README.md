@@ -120,7 +120,6 @@ As a user/art-lover I want to read a blog by the artist with critical studies an
 
     5. Comment
 
-
 ## Apps to Build
 
 1. Accounts - login, logout, forget password, register, profile page.
@@ -137,8 +136,20 @@ As a user/art-lover I want to read a blog by the artist with critical studies an
 
 7. Blog - vote for next work to access.
 
+## Set-up
 
+1. Set up virtual environment
 
+```pip install virtual env```
 
+Go to directory for project and type:
 
+```virtualenv .```
 
+then
+
+```source ./bin/activate```
+
+2. Install django
+
+```pip install django```
