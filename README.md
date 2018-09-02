@@ -1,5 +1,7 @@
 # Art Selling Site
 
+[![Build Status](https://travis-ci.org/harryphelps2/full-stack-frameworks-project.svg?branch=master)](https://travis-ci.org/harryphelps2/full-stack-frameworks-project)
+
 The purpose of the site is to sell the works of a fictional artist, Enrique Filipez. He wants to sell small canvases for a set price and have 
 a place for users to place bids in for larger works. There will be a blog on painting technique that you can access if you are logged in
 and have voted for Enrique's next work. They'll also be a form to commision Enqrique to paint for you. The user will be able to upload an image to 
