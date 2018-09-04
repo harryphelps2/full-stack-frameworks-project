@@ -1,5 +1,10 @@
 # Art Selling Site
 
+## Progress log
+
+Added urls for password reset. Need to read the documentation and add templates to complete the 
+registration fuctionality. Target: Have working registration functionality by tomorrow night (4th)
+
 [![Build Status](https://travis-ci.org/harryphelps2/full-stack-frameworks-project.svg?branch=master)](https://travis-ci.org/harryphelps2/full-stack-frameworks-project)
 
 The purpose of the site is to sell the works of a fictional artist, Enrique Filipez. He wants to sell small canvases for a set price and have 
