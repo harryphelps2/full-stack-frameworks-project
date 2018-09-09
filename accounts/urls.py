@@ -1,8 +1,7 @@
-from django.urls import path, include, re_path
+from django.urls import path, include, reverse_lazy
 from . import urls_reset
 from .views import user_login, user_dashboard, user_logout, user_registration
 from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
-from django.urls import path, include, reverse_lazy
 
 urlpatterns = [
     path('register/', user_registration, name='register'),
