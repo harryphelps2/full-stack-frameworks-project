@@ -17,19 +17,9 @@
 
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    <table>
-        <tr>
-            <td>{{ login_form.username_or_email.label_tag }}</td>
-            <td>{{ login_form.username_or_email }}</td>
-        </tr>
-        <tr>
-            <td>{{ login_form.password.label_tag }}</td>
-            <td>{{ login_form.password }}</td>
-        </tr>
-    </table>
-
-<button type="submit">Login</button>
+    {{ login_form.as_p }}
+    <button type="submit">Login</button>
 </form>
-<a href="{% url 'password_reset'%}">Reset password</a>
+<a href="{% url 'password_reset'%}"><small>Reset password</small></a>
 
 {% endblock %}
