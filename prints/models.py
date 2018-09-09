@@ -1,6 +1,6 @@
 from django.db import models
 
-class Prints(models.Model):
+class Print(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     size = models.CharField(max_length=20)

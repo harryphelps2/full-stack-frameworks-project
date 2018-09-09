@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Prints
+from .models import Print
 
 def all_prints(request):
-    prints = Prints.objects.all()
+    prints = Print.objects.all()
     return render (request, 'prints.html', {'prints': prints})
