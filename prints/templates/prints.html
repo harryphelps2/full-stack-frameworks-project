@@ -10,7 +10,7 @@
             <h5 class="card-title">{{print.title}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ print.size }}</h6>
         </div>
-        <img class="card-img-top" src='https://apollo.imgix.net/content/uploads/2016/03/22387237557.jpg?auto=compress,enhance,format&crop=faces,entropy,edges&fit=crop&w=900&h=600' alt="{{ print.title }}">
+        <img class="card-img-top" src="{{ MEDIA_URL }}{{ print.image }}" alt="{{ print.title }}">
         <div class="card-body">
             <p class="card-text">{{ print.description }}</p>
             <a href="#" class="btn btn-primary">Add to cart</a>
