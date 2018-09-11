@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load static %}
 {% block page_title %}Prints{% endblock %}
 {% block page_header %}Buy my Prints{% endblock %}
 {% block content %}
@@ -12,8 +11,14 @@
         </div>
         <img class="card-img-top" src="{{ MEDIA_URL }}{{ print.image }}" alt="{{ print.title }}">
         <div class="card-body">
-            <p class="card-text">{{ print.description }}</p>
-            <a href="#" class="btn btn-primary">Add to cart</a>
+            <p class="card-text">{{ print.description|truncatewords:20 }}<a href="#">More details</a></p>
+                <button class="minus" disabled>-</button>
+                <span class="quantity" name="quantity">1</span>
+                <button class="plus">+</button>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button class="add-to-cart" type="submit" value="1">Add to Cart</button>
+                </form>
         </div>
     </div>
     {% endfor %} 

@@ -18,6 +18,7 @@ from django.urls import path, include, re_path
 from home.views import index
 from accounts import urls as account_urls
 from prints import urls as prints_urls
+from cart import urls as cart_urls
 from django.views import static
 from .settings import MEDIA_ROOT
 
@@ -25,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="index"),
     path('accounts/', include(account_urls)),
+    path('cart/', include(cart_urls)),
     path('prints/', include(prints_urls)),
     re_path(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
 ]
