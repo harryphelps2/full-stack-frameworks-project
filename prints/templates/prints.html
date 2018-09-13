@@ -11,16 +11,18 @@
         </div>
         <img class="card-img-top" src="{{ MEDIA_URL }}{{ print.image }}" alt="{{ print.title }}">
         <div class="card-body">
-            <p class="card-text">{{ print.description|truncatewords:20 }}<a href="#">More details</a></p>
+                <p class="card-text">{{ print.description|truncatewords:20 }}<a href="#">More details</a></p>
                 <button class="minus" disabled>-</button>
                 <span class="quantity" name="quantity">1</span>
                 <button class="plus">+</button>
-                <form action="" method="post">
+                <form action="{% url 'add_to_cart' print.id %}" method="post">
                     {% csrf_token %}
-                    <button class="add-to-cart" type="submit" value="1">Add to Cart</button>
+                    <button class="add-to-cart" type="submit" value="1" name="quantity">Add to Cart</button>
                 </form>
+                <h4>£{{ print.price }}</h4>
         </div>
     </div>
     {% endfor %} 
 </div>
+<button class="btn-success">Checkout</button>
 {% endblock %}

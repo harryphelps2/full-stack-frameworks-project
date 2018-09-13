@@ -18,9 +18,9 @@ def user_login(request):
         if user_form.is_valid():
             user = auth.authenticate(username=request.POST['username'],
                                         password=request.POST['password'])
-            messages.success(request, "You have successfully logged in")
             if user:
                 auth.login(request, user)
+                messages.success(request, "You have successfully logged in")
                 return redirect(reverse('dashboard'))
             else:
                 messages.error(request, "Your username or password is incorrect")

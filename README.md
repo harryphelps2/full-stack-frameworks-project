@@ -160,3 +160,7 @@ then
 2. Install django
 
 ```pip install django```
+
+Style guide 
+
+We use the BEM naming convention
