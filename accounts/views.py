@@ -27,7 +27,7 @@ def user_login(request):
     else:
         user_form = UserLoginForm()
     # Have to use an instance of the model in this bit
-    return render(request, 'login.html', {'login_form':user_form})
+    return render(request, 'login.html', {'login_form': user_form})
 
 @login_required
 def user_dashboard(request):

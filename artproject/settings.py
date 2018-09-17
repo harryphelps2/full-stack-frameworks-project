@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'accounts',
     'prints',
     'cart',
+    'checkout',
+    'crispy_forms',
+    'auction',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +147,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailAuth',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE')
+STRIPE_SECRET = os.getenv('STRIPE_SECRET')

@@ -2,25 +2,26 @@
 {% block page_title %}Cart{% endblock %}
 {% block page_header %}Shopping Cart{% endblock %}
 {% block content %}
-{% for item in cart_items  %}
-    <div class="row cart">
-        <div class="cart__image">
-            <img src="{{ MEDIA_URL }}{{ item.product.image }}" alt="{{ print.title }}" class="img-thumbnail">
+    {% for item in cart_items  %}
+        <div class="row cart">
+            <div class="cart__image">
+                <img src="{{ MEDIA_URL }}{{ item.product.image }}" alt="{{ print.title }}" class="img-thumbnail">
+            </div>
+            <div class="cart__details">
+                <h3>{{ item.product.title }}</h3>
+                <p>Quantity: {{ item.quantity }}</p>
+                <button class="minus_update">-</button>
+                <span class="new_quantity" name="new_quantity">{{ item.quantity }}</span>
+                <button class="plus_update">+</button>
+                <form action="{% url 'adjust_cart' item.id %}" method="post">
+                {% csrf_token %}
+                    <button class="adjust-cart" value={{item.quantity}} type="submit" name="new_quantity">Update Quantity</button>
+                </form>
+            </div>
         </div>
-        <div class="cart__details">
-            <h3>{{ item.product.title }}</h3>
-            <p>Quantity: {{ item.quantity }}</p>
-            <button class="minus_update">-</button>
-            <span class="new_quantity" name="new_quantity">{{ item.quantity }}</span>
-            <button class="plus_update">+</button>
-            <form action="{% url 'adjust_cart' item.id %}" method="post">
-            {% csrf_token %}
-                <button class="adjust-cart" value={{item.quantity}} type="submit" name="new_quantity">Update Quantity</button>
-            </form>
+    {% endfor %}
+        <div class="cart-total">
+            <h3>Total: £{{ total }}</h3>
         </div>
-    </div>
-{% endfor %}
-    <div class="cart-total">
-        <h3>Total: £{{ total }}</h3>
-    </div>
+        <button action='{% url 'checkout' %}' ><a href="{% url 'checkout' %}">Checkout</a></button>
 {% endblock %}

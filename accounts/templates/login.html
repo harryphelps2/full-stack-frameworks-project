@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 {% if form.errors %}
@@ -17,7 +17,7 @@
 
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %}
-    {{ login_form.as_p }}
+    {{ login_form|crispy }}
     <button type="submit">Login</button>
 </form>
 <a href="{% url 'password_reset'%}"><small>Reset password</small></a>
