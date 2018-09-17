@@ -8,4 +8,4 @@ class Original(Print):
 
     def __str__(self):
         return self.title
-    
+

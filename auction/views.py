@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from .models import Original
 
-# Create your views here.
+def originals(request):
+    originals = Original.objects.all()
+    return render(request, 'auction.html', { 'originals': originals })

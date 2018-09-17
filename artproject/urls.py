@@ -19,6 +19,7 @@ from home.views import index
 from accounts import urls as account_urls
 from prints import urls as prints_urls
 from cart import urls as cart_urls
+from auction import urls as auction_urls
 from checkout import urls as checkout_urls
 from django.views import static
 from .settings import MEDIA_ROOT
@@ -30,5 +31,6 @@ urlpatterns = [
     path('cart/', include(cart_urls)),
     path('checkout/', include(checkout_urls)),
     path('prints/', include(prints_urls)),
+    path('auction/', include(auction_urls)),
     re_path(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
 ]
