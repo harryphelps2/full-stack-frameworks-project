@@ -11,8 +11,7 @@
                 <button class="minus_bid" disabled>-</button>
                 <span class="new_bid">1</span>
                 <button class="plus_bid">+</button> -->
-                <h4>Current highest bid: £<span class="highest_bid">{{ original.highest_bid }}</span> from {{ original.highest_bidder }}</h4>
-                {{ original.id }}
+                <h4>Current highest bid: £<span class="highest_bid">{{ original.highest_bid }}</span> from {{ original.highest_bidder }} at {{ original.bid_time }}</h4>
                 <form action="{% url 'submit_bid' original.id %}" method="post" id="submitBid">
                     {% csrf_token %}
                     <input type="text" name="bid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">

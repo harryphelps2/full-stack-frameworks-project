@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from .models import Original
+from django.contrib import messages
+from datetime import datetime
 
 def originals(request):
     originals = Original.objects.all()
@@ -15,23 +17,18 @@ def submit_bid(request, id):
     1. Add highest bid to lido and display it under the picture
     2. have arrows either side that increase the price in £5 increments
     3. Submit button that takes the new amount and overwrites the highest bidder amount
-    and highest bidder user
-    bid_form = BidForm(request.POST)
-    how do we get the user
     """ 
     original = get_object_or_404(Original, pk=id)
-    new_bid = request.POST.get('bid')
-    original.highest_bid = new_bid
-    original.highest_bidder = request.user
-    original.save()
-    print(original.highest_bid)
-    print(request.user)
-    return render(request, 'auction.html')
-
-
-
-
-
+    old_bid = int(original.highest_bid)
+    new_bid = int(request.POST.get('bid'))
+    if new_bid >= old_bid:
+        original.highest_bid = new_bid
+        original.highest_bidder = request.user
+        original.bid_time = datetime.now()
+        original.save()
+    else:
+        messages.error(request, "You're not going to win the auction with that attitude")
+    return redirect(reverse(originals))
 
 # login required
 def close_auction(request, id):

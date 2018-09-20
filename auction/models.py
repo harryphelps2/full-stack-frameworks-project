@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 class Original(Print):
     highest_bidder = models.ForeignKey(User, null="True", on_delete=models.PROTECT)
     highest_bid = models.DecimalField(max_digits=10, decimal_places=2)
-    start_date = models.DateField(null="True")
-    end_date = models.DateField(null="True")
+    bid_time = models.DateTimeField(auto_now=False, auto_now_add=False, null="True")
+    start_date_time = models.DateTimeField(null="True", auto_now=False, auto_now_add=False)
+    end_date_time = models.DateTimeField(null="True", auto_now=False, auto_now_add=False)
     paid = models.BooleanField(null="True")
 
     def __str__(self):
