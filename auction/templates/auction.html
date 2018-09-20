@@ -2,20 +2,22 @@
 {% block page_title %}Auction{% endblock %}
 {% block page_header %}Bid for my original works{% endblock %}
 {% block content %}
-<div class="card-group">
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
     {% for original in originals %}
     <div class="card text-white bg-dark" style="width: 18rem; margin: 5%;">
-        <div class="card-header">
-            <h5 class="card-title">{{original.title}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ original.size }}</h6>
-        </div>
         <img class="card-img-top" src="{{ MEDIA_URL }}{{ original.image }}" alt="{{ original.title }}">
         <div class="card-body">
-                <p class="card-text">{{ original.description|truncatewords:20 }}<a href="#">More details</a></p>
-                <button class="minus" disabled>-</button>
-                <span class="quantity" name="quantity">1</span>
-                <button class="plus">+</button>
-                <h4>£{{ original.price }}</h4>
+                <!-- <p class="card-text">{{ original.description|truncatewords:20 }}<a href="#">More details</a></p>
+                <button class="minus_bid" disabled>-</button>
+                <span class="new_bid">1</span>
+                <button class="plus_bid">+</button> -->
+                <h4>Current highest bid: £<span class="highest_bid">{{ original.highest_bid }}</span> from {{ original.highest_bidder }}</h4>
+                {{ original.id }}
+                <form action="{% url 'submit_bid' original.id %}" method="post" id="submitBid">
+                    {% csrf_token %}
+                    <input type="text" name="bid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </form>
+                <button type="submit" form="submitBid" value="Submit">Submit bid</button>
         </div>
     </div>
     {% endfor %} 

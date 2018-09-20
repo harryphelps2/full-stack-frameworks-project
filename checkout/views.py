@@ -11,15 +11,10 @@ stripe.api_key = settings.STRIPE_SECRET
 
 @login_required()
 def checkout(request):
-    # def get_context_data(self, **kwargs): # new
-    #     context = super().get_context_data(**kwargs)
-    #     context['key'] = settings.STRIPE_PUBLISHABLE
-    #     return context
 
     if request.method=='POST':
         order_form = OrderForm(request.POST)
         payment_form = MakePaymentForm(request.POST)
-        print(request.POST)
         if order_form.is_valid() and payment_form.is_valid():
             order = order_form.save(commit=False)
             order.date = timezone.now()

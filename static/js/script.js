@@ -38,6 +38,26 @@ $(document).ready(function(){
 			$button.siblings(".minus_update").attr("disabled",false)
         }
         $(".adjust-cart").attr({'value':quantity})
-    });
+	});
+
+	// $(".minus_bid, .plus_bid").click(function(e){
+	// 	var $button = $(this);
+	// 	var $currentBid = $button.siblings(".highest_bid");
+	// 	var $bid = $button.siblings(".new_bid");
+	// 	var bid = parseInt($bid.text());
+
+	// 	if ($button.hasClass("minus_bid")){
+	// 		bid = bid - 5;
+	// 	} else {
+	// 		bid = bid + 5;
+	// 	}
+	// 		$bid.text(bid);
+
+	// 	if (bid == 0){
+	// 		$button.attr("disabled","disabled")
+	// 	} else {
+	// 		$button.siblings(".minus_bid").attr("disabled",false)
+	// 	}
+    // });
     
 })
