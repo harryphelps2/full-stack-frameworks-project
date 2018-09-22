@@ -12,11 +12,11 @@
                 <span class="new_bid">1</span>
                 <button class="plus_bid">+</button> -->
                 <h4>Current highest bid: £<span class="highest_bid">{{ original.highest_bid }}</span> from {{ original.highest_bidder }} at {{ original.bid_time }}</h4>
-                <form action="{% url 'submit_bid' original.id %}" method="post" id="submitBid">
-                    {% csrf_token %}
-                    <input type="text" name="bid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                </form>
-                <button type="submit" form="submitBid" value="Submit">Submit bid</button>
+                <form action="{% url 'submit_bid' original.id %}" method="post" id="test">
+                        {% csrf_token %}
+                        <input type="text" name="bid" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </form>
+                    <button type="submit" form="test" value="Submit">Submit bid</button>
         </div>
     </div>
     {% endfor %} 

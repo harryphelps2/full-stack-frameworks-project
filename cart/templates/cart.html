@@ -2,6 +2,7 @@
 {% block page_title %}Cart{% endblock %}
 {% block page_header %}Shopping Cart{% endblock %}
 {% block content %}
+<h2>Prints</h2>
     {% for item in cart_items  %}
         <div class="row cart">
             <div class="cart__image">
@@ -15,11 +16,23 @@
                 <button class="plus_update">+</button>
                 <form action="{% url 'adjust_cart' item.id %}" method="post">
                 {% csrf_token %}
-                    <button class="adjust-cart" value={{item.quantity}} type="submit" name="new_quantity">Update Quantity</button>
+                    <button class="adjust-cart" value={{ item.quantity }} type="submit" name="new_quantity">Update Quantity</button>
                 </form>
             </div>
         </div>
     {% endfor %}
+<h2>Auction</h2>
+    {% for item in auction_items_to_be_paid  %}
+    <div class="row cart">
+        <div class="cart__image">
+            <img src="{{ MEDIA_URL }}{{ item.image }}" alt="{{ item.title }}" class="img-thumbnail">
+        </div>
+        <div class="cart__details">
+            <h3>{{ item.product.title }}</h3>
+            <h5>Winning bid: £{{ item.price }}</h5>
+        </div>
+    </div>
+{% endfor %}
         <div class="cart-total">
             <h3>Total: £{{ total }}</h3>
         </div>

@@ -1,9 +1,16 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from datetime import datetime
+from auction.models import Original
 
 def view_cart(request):
-    """shows cart contents"""
-    return render(request, "cart.html")
+    """
+    Shows cart contents
+    """
+    user = request.user
+    now = datetime.now()
+    auction_items_to_be_paid = Original.objects.filter(end_date_time__gte=now, paid=False, highest_bidder=user)
+    return render(request, "cart.html", {'auction_items_to_be_paid':auction_items_to_be_paid})
 
 def add_to_cart(request, id):
     """Add quantity of product to the cart"""

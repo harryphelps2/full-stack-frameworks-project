@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block page_title %}Auction{% endblock %}
+{% block page_header %}You won the auction!!!{% endblock %}
+{% block content %}
+<h1>CONGRATULATIONS YOU WON THE AUCTION!!!</h1>
+<a href="{% url 'view_cart' %}">Go to cart</a>
+{% endblock %}

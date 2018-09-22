@@ -5,7 +5,8 @@ from django.contrib import messages
 from datetime import datetime
 
 def originals(request):
-    originals = Original.objects.all()
+    now = datetime.now()
+    originals = Original.objects.all().filter(end_date_time__gte=now)
     return render(request, 'auction.html', { 'originals': originals })
 
 @login_required
@@ -22,7 +23,7 @@ def submit_bid(request, id):
     old_bid = int(original.highest_bid)
     new_bid = int(request.POST.get('bid'))
     if new_bid >= old_bid:
-        original.highest_bid = new_bid
+        original.highest_bid = float(new_bid)
         original.highest_bidder = request.user
         original.bid_time = datetime.now()
         original.save()
@@ -31,10 +32,26 @@ def submit_bid(request, id):
     return redirect(reverse(originals))
 
 # login required
-def close_auction(request, id):
+def you_win(request):
     """
     When now is larger than the closing time and date of the auction
     add the orginal to cart so it can go through checkout
     Have bool on the originals for paid and if it is paid then null the auction start and end date
+    Background tasks
+    https://django-background-tasks.readthedocs.io/en/latest/
+    filter originals by paid is false and auction is closed
+    append to list
+
+
+    on cart paid show separate auction originals 
+    add to list
+    add item to cart
     """
-    pass
+    # filter originals by paid is false and auction is closed
+    now = datetime.now()
+    auction_items_to_be_paid = Original.objects.exclude(end_date_time__lte=now, paid="True")
+    if not auction_items_to_be_paid:
+        redirect(reverse(originals)) 
+    # if it is empty, then redirect to auctions.html
+
+    return render(request, 'youwin.html', { 'auction_items_to_be_paid': auction_items_to_be_paid }) 
