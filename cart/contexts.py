@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from prints.models import Print
 
+
 def cart_contents(request):
     """
     Display cart contents on any page

@@ -21,6 +21,9 @@
             </div>
         </div>
     {% endfor %}
+    <div class="cart-total">
+        <h3>Total: £{{total}}</h3>
+    </div>
 <h2>Auction</h2>
     {% for item in auction_items_to_be_paid  %}
     <div class="row cart">
@@ -29,12 +32,12 @@
         </div>
         <div class="cart__details">
             <h3>{{ item.product.title }}</h3>
-            <h5>Winning bid: £{{ item.price }}</h5>
+            <h5>Winning bid: £{{ item.highest_bid }}</h5>
         </div>
     </div>
 {% endfor %}
-        <div class="cart-total">
-            <h3>Total: £{{ total }}</h3>
-        </div>
+    <div class="cart-total">
+        <h3>Total: £{{auction_total}}</h3>
+    </div>
         <button action='{% url 'checkout' %}' ><a href="{% url 'checkout' %}">Checkout</a></button>
 {% endblock %}

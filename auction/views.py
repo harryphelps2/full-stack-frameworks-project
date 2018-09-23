@@ -20,8 +20,8 @@ def submit_bid(request, id):
     3. Submit button that takes the new amount and overwrites the highest bidder amount
     """ 
     original = get_object_or_404(Original, pk=id)
-    old_bid = int(original.highest_bid)
-    new_bid = int(request.POST.get('bid'))
+    old_bid = original.highest_bid
+    new_bid = float(request.POST.get('bid'))
     if new_bid >= old_bid:
         original.highest_bid = float(new_bid)
         original.highest_bidder = request.user

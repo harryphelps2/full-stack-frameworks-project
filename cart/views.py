@@ -7,10 +7,15 @@ def view_cart(request):
     """
     Shows cart contents
     """
+    cart = request.session.get('cart', {})
     user = request.user
     now = datetime.now()
     auction_items_to_be_paid = Original.objects.filter(end_date_time__gte=now, paid=False, highest_bidder=user)
-    return render(request, "cart.html", {'auction_items_to_be_paid':auction_items_to_be_paid})
+    
+    auction_total=0
+    for item in auction_items_to_be_paid:
+        auction_total += item.highest_bid
+    return render(request, "cart.html", {'auction_items_to_be_paid':auction_items_to_be_paid, 'auction_total': auction_total})
 
 def add_to_cart(request, id):
     """Add quantity of product to the cart"""
