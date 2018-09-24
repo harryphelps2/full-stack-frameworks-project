@@ -31,6 +31,18 @@ def checkout(request):
                     quantity = quantity
                 )
                 order_line_item.save()
+            # user = request.user
+            # now = datetime.now()
+            # auction_items_to_be_paid = Original.objects.filter(end_date_time__gte=now, paid=False, highest_bidder=user)
+            # for id, quantity in auction_items_to_be_paid():
+            #     product = get_object_or_404(Print, pk=id)
+            #     total += quantity * product.price
+            #     order_line_item = OrderLineItem(
+            #         order = order,
+            #         product = product,
+            #         quantity = quantity
+            #     )
+                order_line_item.save()
             
             try:
                 customer = stripe.Charge.create(

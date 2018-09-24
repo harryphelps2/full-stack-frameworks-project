@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Commission{% endblock %}
+{% block page_header %}Work with me{% endblock %}
+{% block content %}
+<p>I have received your proposal and am working up some little studies completely
+    free of charge for you to look at. 
+</p>
+{% for commission in commission_awaiting_acceptance %}
+{{ commission.title }}
+{% endfor %}
+{% endblock %}

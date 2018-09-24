@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Commission{% endblock %}
+{% block page_header %}Work with me{% endblock %}
+{% block content %}
+<p>I hav extensive experience in portraiture, landscape painting and still life.
+    If you would like me to paint sokmething for you, use the form below to submit a proposal. I'll
+    have a look and feedback with a small scale study of what I would paint and a price.
+    If you like what you see, GREAT! You can pay a deposit and I'll get to work. If not, drop me some feedback and 
+    I'll try again.
+</p>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ commission_proposal_form|crispy }}
+    <button type="submit">Submit proposal</button>
+</form>
+{% endblock %}
