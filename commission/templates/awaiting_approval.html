@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Commission{% endblock %}
+{% block page_header %}ACTION: Approval needed{% endblock %}
+{% block content %}
+<p>I've worked up a study for you to have a look at and added a price. If you accept then
+    you'll be taken through to pay a non-refundable deposit of 15% and I can begin work.
+    I'll keep you updated every step of the way and you can feedback to me on changes you want to make.
+</p>
+
+{% for commission in awaiting_approval %}
+<h2>Your chosen title of the piece: {{ commission.title }}</h2>
+<p>Description of how you want it painted: {{ commission.details }}</p>
+<p>A small scale study of how I would like to paint it for you:</p>
+<img src="{{ MEDIA_URL }}{{ commission.image }}" alt="{{ commission.title }}" class="img-thumbnail">
+<h3>Price: {{ commission.price }}</h3>
+<form action="" method="post">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary">It's perfect thank you</button>
+        <button type="button" class="btn btn-secondary">Thanks but no thanks</button>
+    </div>
+</form>
+{% endfor %}
+{% endblock %}

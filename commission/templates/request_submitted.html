@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block page_title %}Commission{% endblock %}
+{% block page_header %}Request received{% endblock %}
+{% block content %}
+<p>I have received your requests and am working up some little studies completely
+    free of charge for you to look at. 
+</p>
+
+{% for commission in request_submitted %}
+<h2>Your chosen title of the piece: {{ commission.title }}</h2>
+<p>Description of how you want it painted: {{ commission.details }}</p>
+<img src="{{ MEDIA_URL }}{{ commission.image }}" alt="{{ commission.title }}" class="img-thumbnail">
+{% endfor %}
+{% endblock %}
