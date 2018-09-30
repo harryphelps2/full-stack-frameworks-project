@@ -9,7 +9,7 @@
     If you like what you see, GREAT! You can pay a deposit and I'll get to work. If not, drop me some feedback and 
     I'll try again.
 </p>
-<form action="" method="post">
+<form action="{% url 'customer_submit_request' %}" method="post">
     {% csrf_token %}
     {{ commission_proposal_form|crispy }}
     <button type="submit">Submit proposal</button>

@@ -6,10 +6,7 @@
 <p>I have received your requests and am working up some little studies completely
     free of charge for you to look at. 
 </p>
-
-{% for commission in request_submitted %}
-<h2>Your chosen title of the piece: {{ commission.title }}</h2>
-<p>Description of how you want it painted: {{ commission.details }}</p>
-<img src="{{ MEDIA_URL }}{{ commission.image }}" alt="{{ commission.title }}" class="img-thumbnail">
-{% endfor %}
+<h2>Your chosen title of the piece: {{ request_submitted.title }}</h2>
+<p>Description of how you want it painted: {{ request_submitted.details }}</p>
+<img src="{{ MEDIA_URL }}{{ request_submitted.image }}" alt="{{ request_submitted.title }}" class="img-thumbnail">
 {% endblock %}

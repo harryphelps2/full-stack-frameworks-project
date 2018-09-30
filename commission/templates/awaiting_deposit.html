@@ -8,13 +8,15 @@
     I'll keep you updated every step of the way and you can feedback to me on changes you want to make.
 </p>
 
-<h2>Your chosen title of the piece: {{ awaiting_approval.title }}</h2>
-<p>Description of how you want it painted: {{ awaiting_approval.details }}</p>
+{% for commission in awaiting_approval %}
+<h2>Your chosen title of the piece: {{ commission.title }}</h2>
+<p>Description of how you want it painted: {{ commission.details }}</p>
 <p>A small scale study of how I would like to paint it for you:</p>
-<img src="{{ MEDIA_URL }}{{ awaiting_approval.image }}" alt="{{ awaiting_approval.title }}" class="img-thumbnail">
-<h3>Price: {{ awaiting_approval.price }}</h3>
+<img src="{{ MEDIA_URL }}{{ commission.image }}" alt="{{ commission.title }}" class="img-thumbnail">
+<h3>Price: {{ commission.price }}</h3>
 <form action="{% url 'accept_proposal' %}" method="post">
     {% csrf_token %}
-    <button type="submit" value="{{ awaiting_approval.id }}">It's perfect thank you</button>
+    <button type="submit">It's perfect thank you</button>
 </form>
+{% endfor %}
 {% endblock %}
