@@ -4,7 +4,13 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Commission
+from checkout.forms import MakePaymentForm
+from django.conf import settings
+from django.contrib import messages
+import stripe
+from django.template.context_processors import csrf
 
+stripe.api_key = settings.STRIPE_SECRET
 
 @login_required
 def commission_status(request):
@@ -26,8 +32,14 @@ def commission_status(request):
             return redirect(reverse('request_submitted'))
         elif not current_commission.price:
             return redirect(reverse('awaiting_approval'))
-        else: 
-            return redirect(reverse('awaiting_deposit'))
+        elif not current_commission.deposit_paid: 
+            return redirect(reverse('pay_deposit'))
+        elif not current_commission.completed:
+            return redirect(reverse('work_in_progress'))
+        elif not current_commission.fully_paid: 
+            return redirect(reverse('pay_full_amount'))
+        else:
+            return render (request, 'submit_proposal.html', {'commission_proposal_form':commission_proposal_form}) 
     except:
         commission_proposal_form = CommissionRequestForm()
         return render (request, 'submit_proposal.html', {'commission_proposal_form':commission_proposal_form})
@@ -93,21 +105,56 @@ def accept_proposal(request):
         Redirect here to add deposit to cart as half of the price.
 
         """
-        return redirect(reverse('awaiting_deposit'))
+        return redirect(reverse('pay_deposit'))
 
 @login_required
-def awaiting_deposit(request):
+def pay_deposit(request):
     """
     Page to pay the deposit.
     """
-    
-    return render(request, 'awaiting_deposit.html', {'awaiting_deposit':awaiting_deposit})
+    user = request.user
+    commission = get_object_or_404(Commission, user=user)
+    price = commission.price
+    deposit = float(commission.price) * 0.15
+    """
+    Add the code from all the checkout page. This should be its own checkout page
+    and then up date deposit.paid to true
+    """
+
+    if request.method=='POST':
+        payment_form = MakePaymentForm(request.POST)
+        if payment_form.is_valid():
+            try:
+                customer = stripe.Charge.create(
+                    amount = int(deposit * 100),
+                    currency = "EUR",
+                    description = request.user.email,
+                    source = payment_form.cleaned_data['stripe_id'],
+                )
+            except stripe.error.CardError:
+                messages.error(request, "Your card was declined!")
+            if customer.paid:
+                messages.success('You have paid! Thank you')
+                cart = {}
+                return redirect(reverse('pay_deposit'))
+            else:
+                messages.error(request, "We were unable to take payment")
+        else:
+            messages.error(request, payment_form.errors)
+    else:
+        payment_form = MakePaymentForm()
+    return render(request, 'pay_deposit.html', {'pay_deposit':pay_deposit, 'payment_form':payment_form, 'publishable':settings.STRIPE_PUBLISHABLE })
 
 @login_required
 def work_in_progress(request):
     """
     View to show the customer how the piece is coming along
+    feedback model
     """
     return render(request, 'work_in_progress.html')
+
+@login_required
+def pay_full_amount(request):
+    pass
                     
 

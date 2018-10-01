@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static from staticfiles %}
+{% block head_js %}
+    <script type="text/javascript" src="https://js.stripe.com/v3/">
+    //<![CDATA[
+    var stripe = Stripe('pk_test_oGzjqmtiyqFycxaJ7nO1aTgL');
+    var elements = stripe.elements()
+    //]]>
+    </script>
+    <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
+{% endblock %}
+{% block page_title %}Commission{% endblock %}
+{% block page_header %}ACTION: Pay deposit{% endblock %}
+{% block content %}
+<form action="{% url 'pay_deposit' %}" method="post" id="payment-form">
+    {% csrf_token %}
+    <div class="form-row">
+      <label for="card-element">
+        Credit or debit card
+      </label>
+      <div id="card-element">
+        {{ payment_form }}
+      </div>
+  
+      <!-- Used to display Element errors. -->
+      <div id="card-errors" role="alert"></div>
+    </div>
+  
+    <button>Submit Payment</button>
+  </form>
+{% endblock %}
