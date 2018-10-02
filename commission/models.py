@@ -24,7 +24,7 @@ class Commission(models.Model):
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     commission = models.ForeignKey(Commission, on_delete=models.PROTECT, null=True)
-    image = models.FileField(upload_to='media/commissions')
+    image = models.FileField(upload_to='media/commissions', blank=True, null=True)
     comments = models.TextField(blank='False', null=True)
     time = models.DateTimeField(auto_now=False, auto_now_add=False, null=True)
 

@@ -3,7 +3,7 @@ from .forms import CommissionRequestForm
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
-from .models import Commission
+from .models import Commission, Feedback
 from checkout.forms import MakePaymentForm
 from django.conf import settings
 from django.contrib import messages
@@ -151,7 +151,12 @@ def work_in_progress(request):
     View to show the customer how the piece is coming along
     feedback model
     """
-    return render(request, 'work_in_progress.html')
+    user = request.user
+    commission_in_progress = get_object_or_404(Commission, user=user)
+    commission_name = commission_in_progress.title  
+    feedback = Feedback.objects.all().order_by('-time')
+
+    return render(request, 'work_in_progress.html', {'feedback': feedback, 'commission_in_progress': commission_in_progress })
 
 @login_required
 def pay_full_amount(request):

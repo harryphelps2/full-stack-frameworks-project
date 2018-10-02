@@ -3,4 +3,25 @@
 {% block page_header %}Request received{% endblock %}
 {% block content %}
 <h1>Work in progress</h1>
+<div>
+    <h2>{{ commission_in_progress.title }}</h2>
+    <p>How's it looking?</p>
+    <img src="{{ MEDIA_URL }}{{ commission_in_progress.image }}" alt="{{ commission_in_progress.title }}" class="img-thumbnail">
+</div>
+<div>
+    <h4>What do you think?</h4>
+    <div class="feedback_form">
+        <form action="">
+            {% csrf_token %}
+            <input type="text">
+            <button type="submit">Submit feedback</button>
+        </form>
+    </div>
+    {% for comment in feedback  %}
+    <p>{{comment.time}} {{ comment.user }} said: <i class="fas fa-quote-left"></i> {{ comment.comments }} <i class="fas fa-quote-right"></i></p>
+    {% if comment.image %}
+        <img src="{{ MEDIA_URL }}{{ comment.image }}" alt="{{ commission_in_progress.title }}" class="img-thumbnail">
+    {% endif %}
+    {% endfor %}
+</div>
 {% endblock %}
