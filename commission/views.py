@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from .models import Commission, Feedback
+from .forms import FeedbackForm
 from checkout.forms import MakePaymentForm
 from django.conf import settings
 from django.contrib import messages
@@ -149,17 +150,32 @@ def pay_deposit(request):
 def work_in_progress(request):
     """
     View to show the customer how the piece is coming along
-    feedback model
+    feedback model.
+    Need to delete and edit comments too
     """
     user = request.user
     commission_in_progress = get_object_or_404(Commission, user=user)
     commission_name = commission_in_progress.title  
     feedback = Feedback.objects.all().order_by('-time')
-
-    return render(request, 'work_in_progress.html', {'feedback': feedback, 'commission_in_progress': commission_in_progress })
+    if request.method == "POST":
+        print("yeeeeeeeeeeeeah")
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            print(comment)
+            print(commission_in_progress)
+            comment.commission = commission_in_progress
+            comment.user = user
+            comment.time = timezone.now() 
+            comment.save()
+            return redirect(reverse('work_in_progress'))
+    else:
+        feedbackform = FeedbackForm()
+    return render(request, 'work_in_progress.html', {'feedback': feedback, 'commission_in_progress': commission_in_progress, 'feedbackform':feedbackform })
 
 @login_required
-def pay_full_amount(request):
+def pay_full_amount(request, pk):
+
     pass
                     
 

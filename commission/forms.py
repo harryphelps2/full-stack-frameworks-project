@@ -1,5 +1,5 @@
 from django import forms
-from .models import Commission
+from .models import Commission, Feedback
 
 class CommissionRequestForm(forms.ModelForm):
     title = forms.CharField(max_length=50, required=True) 
@@ -13,3 +13,9 @@ class CommissionRequestForm(forms.ModelForm):
     class Meta:
         model = Commission
         fields = ['title','details','size','image']
+
+class FeedbackForm(forms.ModelForm):
+
+    class Meta:
+        model = Feedback
+        fields = ['comments']

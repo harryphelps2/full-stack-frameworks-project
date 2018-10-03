@@ -25,7 +25,7 @@
                     <ul class="navbar-nav mr-auto">
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'dashboard' %}">Commissions</a>
+                            <a class="nav-link" href="{% url 'commission' %}">Commissions</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'prints' %}">Buy Prints</a>
@@ -47,7 +47,7 @@
                             <a class="nav-link" href="{% url 'auction' %}">Auction</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Work with me</a>
+                            <a class="nav-link" href="{% url 'commission' %}">Work with me</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>

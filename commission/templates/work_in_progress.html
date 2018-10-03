@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block page_title %}Commission{% endblock %}
 {% block page_header %}Request received{% endblock %}
 {% block content %}
@@ -11,9 +12,9 @@
 <div>
     <h4>What do you think?</h4>
     <div class="feedback_form">
-        <form action="">
+        <form action="{% url 'work_in_progress' %}" method="POST">
             {% csrf_token %}
-            <input type="text">
+            {{ feedbackform|crispy }}
             <button type="submit">Submit feedback</button>
         </form>
     </div>
