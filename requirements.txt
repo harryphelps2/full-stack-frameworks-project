@@ -1,9 +1,9 @@
-Django==2.1.1
+Django==2.1.11
 Pillow==5.2.0
 pytz==2018.5
 certifi==2018.8.24
 chardet==3.0.4
-Django==2.1.1
+Django==2.1.11
 idna==2.7
 Pillow==5.2.0
 pytz==2018.5
@@ -12,7 +12,7 @@ stripe==2.8.1
 urllib3==1.23
 certifi==2018.8.24
 chardet==3.0.4
-Django==2.1.1
+Django==2.1.11
 django-bootstrap-forms==0.1
 idna==2.7
 Pillow==5.2.0
@@ -22,7 +22,7 @@ stripe==2.8.1
 urllib3==1.23
 certifi==2018.8.24
 chardet==3.0.4
-Django==2.1.1
+Django==2.1.11
 django-bootstrap-forms==0.1
 django-crispy-forms==1.7.2
 idna==2.7
